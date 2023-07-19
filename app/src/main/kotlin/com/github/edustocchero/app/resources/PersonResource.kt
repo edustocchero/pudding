@@ -15,10 +15,10 @@ import com.github.edustocchero.utils.Functor
 
 @RestController
 @RequestMapping("/books")
-class BookResource(val personRepository: PersonRepository) {
+class PersonResource(val personRepository: PersonRepository) {
 
   @PostMapping
-  fun create(@RequestBody request: CreateBookRequest): ResponseEntity<Person> {
+  fun create(@RequestBody request: CreatePersonRequest): ResponseEntity<Person> {
     val person = Functor(request).fmap { Person(UUID.randomUUID(), it.name) }
     val saved = personRepository.save(person)
     return ResponseEntity.ok(saved)
@@ -34,4 +34,4 @@ class BookResource(val personRepository: PersonRepository) {
   }
 }
 
-data class CreateBookRequest(val name: String)
+data class CreatePersonRequest(val name: String)
